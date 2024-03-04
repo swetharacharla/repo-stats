@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg1" {
-  name     = "acc-dept"
+  name     = var.resource_group_name
   location = "australiaeast"
 }
 resource "azurerm_network_security_group" "nsg1" {
@@ -8,19 +8,19 @@ resource "azurerm_network_security_group" "nsg1" {
   resource_group_name = azurerm_resource_group.rg1.name
 }
 resource "azurerm_virtual_network" "vn1" {
-  name                = "acc-vn"
+  name                = var.vn-02
   location            = azurerm_resource_group.rg1.location
   resource_group_name = azurerm_resource_group.rg1.name
-  address_space       = ["10.0.0.0/8"]
+  address_space       = var.address_space
 }
 resource "azurerm_subnet" "subnet1" {
-  name                 = "acc-subnet"
+  name                 = var.subnet-o2
   resource_group_name  = azurerm_resource_group.rg1.name
   virtual_network_name = azurerm_virtual_network.vn1.name
-  address_prefixes     = ["10.2.128.0/17"]
+  address_prefixes     = var.address_prefixes
 }
 resource "azurerm_network_interface" "nic1" {
-  name                = "acc-nic"
+  name                = var.nic-02
   resource_group_name = azurerm_resource_group.rg1.name
   location            = azurerm_resource_group.rg1.location
   ip_configuration {
@@ -30,7 +30,7 @@ resource "azurerm_network_interface" "nic1" {
   }
 }
 resource "azurerm_linux_virtual_machine" "vm1" {
-  name                = "acc-vm"
+  name                = var.vm-02
   resource_group_name = azurerm_resource_group.rg1.name
   location            = azurerm_resource_group.rg1.location
   size                = "Standard_B1s"
