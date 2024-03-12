@@ -30,7 +30,7 @@ resource "azurerm_network_interface" "nic1" {
   }
 }
 resource "azurerm_linux_virtual_machine" "vm1" {
-  name                = var.vm-02
+  name                = var.vm-01
   resource_group_name = azurerm_resource_group.rg1.name
   location            = azurerm_resource_group.rg1.location
   size                = "Standard_B1s"
@@ -61,3 +61,13 @@ resource "azurerm_linux_virtual_machine" "vm1" {
   }
   zone = "1"
 }
+
+
+# resource "azurerm_dev_test_global_vm_shutdown_schedule" "shutdown" {
+#   virtual_machine_id = azurerm_linux_virtual_machine.vm1.id
+#   location = azurerm_resource_group.rg1.location
+#   enabled = true
+#   timezone = AUS Eastern Standard Time
+#   daily_recurrence_time = "2000"
+
+#   }           
